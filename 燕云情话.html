@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>燕云情话</title>
+<style>
+  body {
+    background: linear-gradient(135deg, #ffe3e3, #ffd6f5, #e3e7ff);
+    overflow: hidden;
+    height: 100vh;
+    margin: 0;
+    font-family: "微软雅黑", sans-serif;
+  }
+
+  .popup {
+    position: absolute;
+    padding: 15px 25px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 20px;
+    animation: fadeInOut 7s forwards, float 7s ease-in-out;
+    pointer-events: none;
+  }
+
+  @keyframes fadeInOut {
+    0% {opacity: 0; transform: scale(0.5);}
+    10% {opacity: 1; transform: scale(1);}
+    90% {opacity: 1; transform: scale(1);}
+    100% {opacity: 0; transform: scale(0.5);}
+  }
+
+  @keyframes float {
+    from {transform: translateY(0);}
+    to {transform: translateY(-100px);}
+  }
+
+  button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ff7eb3;
+    color: white;
+    font-size: 18px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  button:hover {
+    background: #ff9cc8;
+  }
+</style>
+</head>
+<body>
+
+<button onclick="startPopups()">💓 点击开始弹窗 💓</button>
+
+<script>
+const messages = [
+  "最最喜欢你",
+  "一起玩燕云",
+  "比起论剑，我更喜欢你",
+  "来刀房和我约会",
+  "一直在一起",
+  "我好想你",
+  "群策吗？",
+  "打刀房吗？",
+  "别串了，我爱你"
+];
+
+function randomColor() {
+  const colors = ["#ff7eb3","#ff758c","#9b5de5","#f15bb5","#ff99c8","#fcbf49","#4cc9f0"];
+  return colors[Math.floor(Math.random()*colors.length)];
+}
+
+function createPopup() {
+  const popup = document.createElement("div");
+  popup.className = "popup";
+  popup.innerText = messages[Math.floor(Math.random()*messages.length)];
+  popup.style.backgroundColor = randomColor();
+
+  const x = Math.random() * (window.innerWidth - 200);
+  const y = Math.random() * (window.innerHeight - 100);
+  popup.style.left = `${x}px`;
+  popup.style.top = `${y}px`;
+
+  document.body.appendChild(popup);
+  setTimeout(() => popup.remove(), 7000);
+}
+
+function startPopups() {
+  let count = 0;
+  const interval = setInterval(() => {
+    createPopup();
+    count++;
+    if (count > 30) clearInterval(interval);
+  }, 400);
+}
+</script>
+
+</body>
+</html>
